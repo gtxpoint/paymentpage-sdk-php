@@ -1,9 +1,4 @@
-# TrxHosts PHP SDK
-
-[![Build Status](https://travis-ci.com/trxhosts/paymentpage-sdk-php.svg?branch=main)](https://travis-ci.com/trxhosts/paymentpage-sdk-php)
-
-This is a set of libraries in the PHP language to ease integration of your service
-with the TrxHosts Payment Page.
+# PHP SDK
 
 Please note that for correct SDK operating you must have at least PHP 7.0.  
 
@@ -15,14 +10,14 @@ Please note that for correct SDK operating you must have at least PHP 7.0.
 
 Install with composer
 ```bash
-composer require trxhosts/paymentpage-sdk
+composer require gtxpoint/paymentpage-sdk
 ```
 
 ### Get URL for payment
 
 ```php
-$gate = new trxhosts\Gate('secret');
-$payment = new trxhosts\Payment('11', 'some payment id');
+$gate = new gtxpoint\Gate('secret');
+$payment = new gtxpoint\Payment('11', 'some payment id');
 $payment->setPaymentAmount(1000)->setPaymentCurrency('RUB');
 $url = $gate->getPurchasePaymentPageUrl($payment);
 ``` 
@@ -31,19 +26,19 @@ $url = $gate->getPurchasePaymentPageUrl($payment);
 
 If you want to use another domain for URL you can change it with optional `Gate` constructor parameter:
 ```php
-new trxhosts\Gate('secret', 'https://mydomain.com/payment');
+new gtxpoint\Gate('secret', 'https://mydomain.com/payment');
 ```
 or change it with method 
 ```php
 $gate->setPaymentBaseUrl('https://mydomain.com/payment');
 ```
 
-### Handle callback from TrxHosts
+### Handle callback
 
 You'll need to autoload this code in order to handle notifications:
 
 ```php
-$gate = new trxhosts\Gate('secret');
+$gate = new gtxpoint\Gate('secret');
 $callback = $gate->handleCallback($data);
 ```
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace trxhosts\tests;
+namespace gtxpoint\tests;
 
-use trxhosts\Payment;
+use gtxpoint\Payment;
 
 class PaymentTest extends \PHPUnit\Framework\TestCase
 {

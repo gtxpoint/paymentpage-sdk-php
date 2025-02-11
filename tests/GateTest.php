@@ -1,10 +1,10 @@
 <?php
 
-namespace trxhosts\tests;
+namespace gtxpoint\tests;
 
-use trxhosts\Callback;
-use trxhosts\Gate;
-use trxhosts\Payment;
+use gtxpoint\Callback;
+use gtxpoint\Gate;
+use gtxpoint\Payment;
 
 class GateTest extends \PHPUnit\Framework\TestCase
 {

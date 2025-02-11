@@ -1,10 +1,10 @@
 <?php
 
-namespace trxhosts\tests;
+namespace gtxpoint\tests;
 
-use trxhosts\PaymentPage;
-use trxhosts\SignatureHandler;
-use trxhosts\Payment;
+use gtxpoint\PaymentPage;
+use gtxpoint\SignatureHandler;
+use gtxpoint\Payment;
 
 class PaymentPageTest extends \PHPUnit\Framework\TestCase
 {

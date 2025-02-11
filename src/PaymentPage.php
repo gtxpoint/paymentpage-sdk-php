@@ -1,6 +1,6 @@
 <?php
 
-namespace trxhosts;
+namespace gtxpoint;
 
 use Exception;
 
@@ -16,7 +16,7 @@ class PaymentPage
      *
      * @var string
      */
-    private $baseUrl = 'https://paymentpage.trxhost.com/';
+    private $baseUrl = '';
 
     /**
      * Signature Handler
