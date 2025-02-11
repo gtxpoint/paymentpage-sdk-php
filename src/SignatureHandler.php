@@ -1,11 +1,11 @@
 <?php
 
-namespace trxhosts;
+namespace gtxpoint;
 
 /**
  * SignatureHandler
  *
- * @see https://developers.trxhost.com/en/en_PP_Authentication.html
+ * @see https://developers.gtxpoint.com/en/en_PP_Authentication.html
  */
 class SignatureHandler
 {

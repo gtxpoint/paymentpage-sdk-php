@@ -1,6 +1,6 @@
 <?php
 
-namespace trxhosts;
+namespace gtxpoint;
 
 use Exception;
 
@@ -10,13 +10,6 @@ use Exception;
 class PaymentPage
 {
     const PATH_PAYMENT = 'payment';
-
-    /**
-     * Base URL for payment
-     *
-     * @var string
-     */
-    private $baseUrl = 'https://paymentpage.trxhost.com/';
 
     /**
      * Signature Handler
@@ -34,26 +27,10 @@ class PaymentPage
 
     /**
      * @param SignatureHandler $signatureHandler
-     * @param string $baseUrl
      */
-    public function __construct(SignatureHandler $signatureHandler, string $baseUrl = '')
+    public function __construct(SignatureHandler $signatureHandler)
     {
         $this->signatureHandler = $signatureHandler;
-
-        $this->setBaseUrl($baseUrl);
-    }
-
-    /**
-     * @param string $baseUrl
-     * @return $this
-     */
-    public function setBaseUrl(string $baseUrl): self
-    {
-        if ($baseUrl) {
-            $this->baseUrl = $baseUrl;
-        }
-
-        return $this;
     }
 
     /**
@@ -70,12 +47,13 @@ class PaymentPage
     /**
      * Get full URL for payment
      *
+     * @param string $baseUrl
      * @param Payment $payment
      *
      * @return string
      * @throws Exception
      */
-    public function getUrl(Payment $payment): string
+    public function getUrl(string $baseUrl, Payment $payment): string
     {
         $query = http_build_query($payment->getParams());
         $signature = urlencode($this->signatureHandler->sign($payment->getParams()));
@@ -85,20 +63,21 @@ class PaymentPage
             $pathWithQuery = $payment->getProjectId() . '/' . $this->encryptor->safeEncrypt($pathWithQuery);
         }
 
-        return $this->getNormalizedBaseURL() . $pathWithQuery;
+        return $this->getNormalizedBaseURL($baseUrl) . $pathWithQuery;
     }
 
     /**
+     * @param string $baseUrl
      * @return string
      */
-    private function getNormalizedBaseURL(): string
+    private function getNormalizedBaseURL(string $baseUrl): string
     {
         $regexp = sprintf('/\/%s$/', self::PATH_PAYMENT);
 
-        if (preg_match($regexp, $this->baseUrl)) {
-            $this->baseUrl = preg_replace($regexp, '/', $this->baseUrl);
+        if (preg_match($regexp, $baseUrl)) {
+            $baseUrl = preg_replace($regexp, '/', $baseUrl);
         }
 
-        return $this->baseUrl;
+        return $baseUrl;
     }
 }

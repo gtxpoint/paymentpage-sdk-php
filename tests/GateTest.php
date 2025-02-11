@@ -1,10 +1,10 @@
 <?php
 
-namespace trxhosts\tests;
+namespace gtxpoint\tests;
 
-use trxhosts\Callback;
-use trxhosts\Gate;
-use trxhosts\Payment;
+use gtxpoint\Callback;
+use gtxpoint\Gate;
+use gtxpoint\Payment;
 
 class GateTest extends \PHPUnit\Framework\TestCase
 {
@@ -25,9 +25,9 @@ class GateTest extends \PHPUnit\Framework\TestCase
 
     public function testGetPurchasePaymentPageUrlEncrypted()
     {
-        $this->gate = new Gate('test', '', 'qwerty');
+        $this->gate = new Gate('test', 'qwerty');
         $payment = (new Payment(402))->setPaymentId('test payment id');
-        $paymentUrl = $this->gate->getPurchasePaymentPageUrl($payment);
+        $paymentUrl = $this->gate->getPurchasePaymentPageUrl('https://paymentpage.gtxpoint.com/', $payment);
 
         self::assertRegExp('~^https://\w+.\w+.\w+/\d+/[\w\s/+=]+$~', $paymentUrl);
     }
@@ -35,21 +35,10 @@ class GateTest extends \PHPUnit\Framework\TestCase
     public function testGetPurchasePaymentPageUrl()
     {
         $payment = (new Payment(100))->setPaymentId('test payment id');
-        $paymentUrl = $this->gate->getPurchasePaymentPageUrl($payment);
+        $paymentUrl = $this->gate->getPurchasePaymentPageUrl('http://test-url.test/test', $payment);
 
         self::assertNotEmpty($paymentUrl);
         self::assertStringStartsWith($this->testUrl, $paymentUrl);
-    }
-
-    public function testSetPaymentBaseUrl()
-    {
-        $someTestUrl = 'http://some-test-url.test/test/payment';
-
-        self::assertEquals(Gate::class, get_class($this->gate->setPaymentBaseUrl($someTestUrl)));
-
-        $paymentUrl = $this->gate->getPurchasePaymentPageUrl(new Payment(100));
-
-        self::assertStringStartsWith($someTestUrl, $paymentUrl);
     }
 
     public function testHandleCallback()

@@ -1,10 +1,10 @@
 {
-    "name": "trxhosts/paymentpage-sdk",
-    "description": "TrxHosts PHP SDK",
+    "name": "gtxpoint/paymentpage-sdk",
+    "description": "PHP SDK",
     "type": "library",
     "license": "MIT",
     "autoload": {
-        "psr-4": { "trxhosts\\": "src/" }
+        "psr-4": { "gtxpoint\\": "src/" }
     },
     "require": {
         "ext-openssl": "*"

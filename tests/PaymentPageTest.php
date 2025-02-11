@@ -1,10 +1,10 @@
 <?php
 
-namespace trxhosts\tests;
+namespace gtxpoint\tests;
 
-use trxhosts\PaymentPage;
-use trxhosts\SignatureHandler;
-use trxhosts\Payment;
+use gtxpoint\PaymentPage;
+use gtxpoint\SignatureHandler;
+use gtxpoint\Payment;
 
 class PaymentPageTest extends \PHPUnit\Framework\TestCase
 {
@@ -19,10 +19,10 @@ class PaymentPageTest extends \PHPUnit\Framework\TestCase
             ->setPaymentId('test payment id')
             ->setPaymentDescription('B&W');
 
-        $url = $paymentPage->getUrl($payment);
+        $url = $paymentPage->getUrl('https://paymentpage.gtxpoint.com/', $payment);
 
         self::assertEquals(
-            'https://paymentpage.trxhost.com/payment?project_id=100&interface_type=%7B%22id%22%3A23%7D'
+            'https://paymentpage.gtxpoint.com/payment?project_id=100&interface_type=%7B%22id%22%3A23%7D'
             . '&payment_id=test+payment+id&payment_description=B%26W&signature=97JFQpAyJ4HPfGVedJh0M1MqQDOFt%2FM'
             . 'Cbdh8VrsT7DdRyTBDAF2mvUOsDANx1ZPfbvZg0%2BVUbF43xJnq0jEeLA%3D%3D',
             $url

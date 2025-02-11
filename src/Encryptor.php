@@ -1,6 +1,6 @@
 <?php
 
-namespace trxhosts;
+namespace gtxpoint;
 
 use Exception;
 

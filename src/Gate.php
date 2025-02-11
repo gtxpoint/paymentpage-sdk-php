@@ -1,6 +1,6 @@
 <?php
 
-namespace trxhosts;
+namespace gtxpoint;
 
 use Exception;
 
@@ -31,13 +31,12 @@ class Gate
      * Gate constructor.
      *
      * @param string $secret Secret key
-     * @param string $baseUrl Base URL for concatenate with payment params
      * @param string $encryptSecret Secret key for encode URL path and params
      */
-    public function __construct(string $secret, string $baseUrl = '', string $encryptSecret = '')
+    public function __construct(string $secret, string $encryptSecret = '')
     {
         $this->signatureHandler = new SignatureHandler($secret);
-        $this->paymentPageUrlBuilder = new PaymentPage($this->signatureHandler, $baseUrl);
+        $this->paymentPageUrlBuilder = new PaymentPage($this->signatureHandler);
 
         if ($encryptSecret) {
             $this->paymentPageUrlBuilder->setEncryptor(new Encryptor($encryptSecret));
@@ -45,27 +44,17 @@ class Gate
     }
 
     /**
-     * @param string $paymentBaseUrl
-     * @return Gate
-     */
-    public function setPaymentBaseUrl(string $paymentBaseUrl = ''): self
-    {
-        $this->paymentPageUrlBuilder->setBaseUrl($paymentBaseUrl);
-
-        return $this;
-    }
-
-    /**
      * Get URL for purchase payment page
      *
+     * @param string $baseUrl
      * @param Payment $payment Payment object
      *
      * @return string
      * @throws Exception
      */
-    public function getPurchasePaymentPageUrl(Payment $payment): string
+    public function getPurchasePaymentPageUrl(string $baseUrl, Payment $payment): string
     {
-        return $this->paymentPageUrlBuilder->getUrl($payment);
+        return $this->paymentPageUrlBuilder->getUrl($baseUrl, $payment);
     }
 
     /**

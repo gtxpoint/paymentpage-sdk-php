@@ -1,8 +1,8 @@
 <?php
 
-namespace trxhosts\tests;
+namespace gtxpoint\tests;
 
-use trxhosts\SignatureHandler;
+use gtxpoint\SignatureHandler;
 
 class SignatureHandlerTest extends \PHPUnit\Framework\TestCase
 {

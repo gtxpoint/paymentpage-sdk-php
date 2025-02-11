@@ -1,9 +1,9 @@
 <?php
 
-namespace trxhosts\tests;
+namespace gtxpoint\tests;
 
-use trxhosts\Callback;
-use trxhosts\SignatureHandler;
+use gtxpoint\Callback;
+use gtxpoint\SignatureHandler;
 
 class CallbackFormatTest extends \PHPUnit\Framework\TestCase
 {
